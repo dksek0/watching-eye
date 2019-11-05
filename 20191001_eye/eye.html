@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" integrity="sha256-7VVaJ5GDwFQiLIc+eNksQLUSSY5JNZtqv9o2BI8UGYg=" crossorigin="anonymous" />
+  <title>Document</title>
+  <style>
+  .eyeWrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 284px;
+    height: 284px;
+    background: url(./img/eye_1.png) no-repeat 0 0;
+  }
+  .eye {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 284px;
+    height: 284px;
+    transform: translate(-50%, -50%);
+  }
+  .eyeBall {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    transform: translate(-50%, calc(-50% - 30px));
+  }
+  </style>
+</head>
+<body>
+  <div class="eyeWrap">
+    <div class="eye">
+      <img src="./img/eye_3.png" alt="" class="eyeBall">
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" integrity="sha256-7VVaJ5GDwFQiLIc+eNksQLUSSY5JNZtqv9o2BI8UGYg=" crossorigin="anonymous" />
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script>
+    var $eyeWrap = $('.eyeWrap')[0];
+    var $eyeWrap_offsetTop = $eyeWrap.offsetTop;
+    var $eyeWrap_offsetLeft = $eyeWrap.offsetLeft;
+    
+    function calcAngleDegrees(x, y) {
+      return Math.atan2(y, x) * 180 / Math.PI;
+    }
+
+    $(window).mousemove(function( event ) {
+      var gap_x = event.originalEvent.clientX - $eyeWrap_offsetLeft;
+      var gap_y = event.originalEvent.clientY - $eyeWrap_offsetTop;
+      var calcEyeRotate = (calcAngleDegrees(gap_x, gap_y) + 450) % 360;
+      $('.eye').css('transform', 'translate(-50%, -50%) rotate('+ calcEyeRotate + 'deg)');
+      $('.eyeBall').css('transform', 'translate(-50%, calc(-50% - 30px)) rotate(-'+ calcEyeRotate + 'deg)');
+    });
+
+   
+  </script>
+</body>
+</html>
